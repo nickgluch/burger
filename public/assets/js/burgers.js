@@ -1,11 +1,12 @@
 
+console.log('burgers.js accessed');
 $(function () {
   $(".change-devoured").on("click", function (event) {
     var id = $(this).data("id");
     var newDevoured = $(this).data("newdevoured");
 
     var newDevouredState = {
-      devoured: newDevoured
+      devoured: !newDevoured
     };
 
     // Send the PUT request.
@@ -24,11 +25,12 @@ $(function () {
   $(".create-form").on("submit", function (event) {
     // Make sure to preventDefault on a submit event.
     event.preventDefault();
-
+    console.log('submitted');
     var newBurger = {
-      name: $("#ca").val().trim(),
-      devoured: $("[name=devoured]:checked").val().trim()
+      name: $("#burger_nameID").val().trim(),
+      devoured: 0
     };
+    console.log(newBurger);
 
     // Send the POST request.
     $.ajax("/api/burgers", {

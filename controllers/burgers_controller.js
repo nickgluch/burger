@@ -14,11 +14,17 @@ router.get("/", function (req, res) {
         };
         console.log(burgerObject);
         res.render("index", burgerObject);
+
     });
 });
 
+
 router.post("/api/burgers", function (req, res) {
-    burger.insertOne(["burger_name", 'devoured'], [req.body.burger_name, req.body.devoured], function (result) {
+    burger.insertOne([
+        "burger_name", 'devoured'
+    ], [
+        req.body.name, req.body.devoured
+    ], function (result) {
         // Send back the ID of the new burger
         res.json({ id: result.insertId });
     });

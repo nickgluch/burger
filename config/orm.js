@@ -39,8 +39,9 @@ var orm = {
     selectAll: function (tableInput, cb) {
         var queryString = "SELECT * FROM " + tableInput + ";";
         connection.query(queryString, function (err, result) {
-            if (err) throw err;
-            console.log(result);
+            if (err) { throw err; }
+            cb(result);
+            // console.log(result);
         });
     },
     insertOne: function (table, cols, vals, cb) {
@@ -54,6 +55,7 @@ var orm = {
         queryString += ") ";
 
         console.log(queryString);
+        console.log(queryString.sql);
 
         connection.query(queryString, vals, function (err, result) {
             if (err) {
@@ -62,13 +64,6 @@ var orm = {
 
             cb(result);
         });
-
-        // var queryString = "INSERT INTO burgers SET ?";
-        // console.log(queryString);
-        // connection.query(queryString, [burger_name], function (err, result) {
-        //     if (err) throw err;
-        //     console.log(result);
-        // });
     },
     updateOne: function (table, objColVals, condition, cb) {
         var queryString = "UPDATE " + table;
